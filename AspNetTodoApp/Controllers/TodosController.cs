@@ -17,7 +17,8 @@ namespace AspNetTodoApp.Controllers
         // GET: Todos
         public ActionResult Index()
         {
-            return View(db.Todos.ToList());
+            var todos = db.Todos.Include(t => t.TodoList);
+            return View(todos.ToList());
         }
 
         // GET: Todos/Details/5
@@ -38,6 +39,7 @@ namespace AspNetTodoApp.Controllers
         // GET: Todos/Create
         public ActionResult Create()
         {
+            ViewBag.TodoListId = new SelectList(db.TodoLists, "Id", "Name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace AspNetTodoApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,IsComplete")] Todo todo)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,IsComplete,TodoListId")] Todo todo)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace AspNetTodoApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.TodoListId = new SelectList(db.TodoLists, "Id", "Name", todo.TodoListId);
             return View(todo);
         }
 
@@ -70,6 +73,7 @@ namespace AspNetTodoApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.TodoListId = new SelectList(db.TodoLists, "Id", "Name", todo.TodoListId);
             return View(todo);
         }
 
@@ -78,7 +82,7 @@ namespace AspNetTodoApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,IsComplete")] Todo todo)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,IsComplete,TodoListId")] Todo todo)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace AspNetTodoApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.TodoListId = new SelectList(db.TodoLists, "Id", "Name", todo.TodoListId);
             return View(todo);
         }
 

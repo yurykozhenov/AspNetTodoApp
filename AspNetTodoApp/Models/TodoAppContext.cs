@@ -25,6 +25,7 @@ namespace AspNetTodoApp.Models
 
             var tl1 = new TodoList
             {
+                Name = "Best Todo List",
                 User = u1
             };
 
@@ -32,7 +33,7 @@ namespace AspNetTodoApp.Models
 
             var t1 = new Todo
             {
-                Title = "Buy Groceries",
+                Title = "Buy groceries",
                 Description = "- Bread \n - Milk \n - Eggs",
                 IsComplete = true,
                 TodoList = tl1
@@ -40,16 +41,16 @@ namespace AspNetTodoApp.Models
 
             var t2 = new Todo
             {
-                Title = "Buy Groceries",
-                Description = "- Bread \n - Milk \n - Eggs",
+                Title = "Clean house",
+                Description = "Better do this today",
                 IsComplete = true,
                 TodoList = tl1
             };
 
             var t3 = new Todo
             {
-                Title = "Buy Groceries",
-                Description = "- Bread \n - Milk \n - Eggs",
+                Title = "Feed cat",
+                Description = "He is hungry",
                 IsComplete = true,
                 TodoList = tl1
             };

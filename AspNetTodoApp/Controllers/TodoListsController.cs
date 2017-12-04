@@ -48,7 +48,7 @@ namespace AspNetTodoApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId")] TodoList todoList)
+        public ActionResult Create([Bind(Include = "Id,Name,UserId")] TodoList todoList)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace AspNetTodoApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId")] TodoList todoList)
+        public ActionResult Edit([Bind(Include = "Id,Name,UserId")] TodoList todoList)
         {
             if (ModelState.IsValid)
             {
